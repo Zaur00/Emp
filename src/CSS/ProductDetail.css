@@ -1,0 +1,185 @@
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1300px;
+    margin: 70px auto;
+    gap: 2rem;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.product-gallery {
+    flex: 1;
+    min-width: 400px;
+    position: relative;
+    margin-left: 40px;
+
+}
+
+.main-image {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.thumbnail-list {
+    position: absolute;
+    top: 0;
+    left: -100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.thumbnail-list img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.thumbnail-list img:hover,
+.thumbnail-list img.active {
+    border-color: #000;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-info h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 22px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.discount {
+    font-size: 18px;
+    color: #D52B1E;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.extra-info p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.loading,
+.not-found {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 80px;
+}
+
+.slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    height: 500px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.main-slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.slider-btn:hover {
+    background: #fff;
+    color: #D52B1E;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-btn.prev {
+    left: -60px;
+}
+
+.slider-btn.next {
+    right: -60px;
+}
+
+.color-selector .color-btn {
+    margin: 5px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.color-selector .color-btn.active {
+    background-color: black;
+    color: white;
+}
+.size-selector {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+.size-btn {
+    padding: 6px 12px;
+    border: 1px solid #333;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.size-btn.disabled {
+    background-color: #eee;
+    color: #999;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
