@@ -1,67 +1,133 @@
-// 📁 src/pages/Home.jsx
-import React, { useEffect, useState } from "react";
-import CategorySidebar from "../components/CategorySidebar";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
-import "../CSS/Home.css"; // Assuming you have a CSS file for styles
-import { UserOutlined } from "@ant-design/icons"; // Assuming you want to use this icon
-import { StarOutlined } from "@ant-design/icons"; // Assuming you want to use this icon
-import { ShoppingCartOutlined } from "@ant-design/icons"; // Assuming you want to use this icon
+import { UserOutlined, StarOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import Skeleton from "@mui/material/Skeleton";
+import LoginDropdown from "../components/LoginDropdown";
+import { AuthContext } from "../Context/AuthContext";
+import "../CSS/Home.css";
+
 const Home = () => {
     const [categories, setCategories] = useState([]);
+    const [showLogin, setShowLogin] = useState(false);
+    const dropdownRef = useRef(null);
+    const { user, logout } = useContext(AuthContext);
 
     useEffect(() => {
         fetch("https://ecommerce.ibradev.me/categories/all")
-            .then(res => res.json())
-            .then(data => setCategories(data))
-            .catch(err => console.error("Kateqoriya yükləmə xətası:", err));
+            .then((res) => res.json())
+            .then((data) => setCategories(data))
+            .catch((err) => console.error("Kateqoriya yükləmə xətası:", err));
     }, []);
-    const images = [
-        "https://cdn-cloudflare.emporium.az/home-page/cat_1.jpg?v=1.8.40",
-        "https://cdn-cloudflare.emporium.az/home-page/cat_65.jpg?v=1.8.40",
-        "https://cdn-cloudflare.emporium.az/home-page/cat_189.jpg?v=1.8.40",
-        "https://cdn-cloudflare.emporium.az/home-page/cat_264.jpg?v=1.8.40",
-        "https://cdn-cloudflare.emporium.az/home-page/cat_297.jpg?v=1.8.40",
-        "https://cdn-cloudflare.emporium.az/home-page/cat_228.jpg?v=1.8.40",
-    ]
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowLogin(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const images = [
+        "https://cdn-cloudflare.emporium.az/home-page/cat_228.jpg?v=1.8.40",
+        "https://cdn-cloudflare.emporium.az/home-page/cat_65.jpg?v=1.8.40",
+        "https://cdn-cloudflare.emporium.az/home-page/cat_1.jpg?v=1.8.40",
+        "https://cdn-cloudflare.emporium.az/home-page/cat_189.jpg?v=1.8.40",
+        "https://cdn-cloudflare.emporium.az/home-page/cat_297.jpg?v=1.8.40",
+        "https://cdn-cloudflare.emporium.az/home-page/cat_264.jpg?v=1.8.40",
+    ];
 
     return (
         <div>
-            {/* Navbar */}
             <nav className="container navbar">
                 <ul className="nav-links">
-                    {categories.map((cat) => (
-                        <li key={cat.id}>
-                            <Link to={`/${cat.slug}`} >{cat.name}</Link>
-                        </li>
-                    ))}
+                    {categories.length === 0 ? (
+                        <li>Yüklənir...</li>
+                    ) : (
+                        categories.map((cat) => (
+                            <li key={cat.id}>
+                                <Link to={`/${cat.slug}`}>{cat.name}</Link>
+                            </li>
+                        ))
+                    )}
                 </ul>
-                <a href="/" className="logo" >Emporium</a>
-                <Link to="/profile" className="nav-icon">
-                    <UserOutlined />
-                    <StarOutlined />
-                    <ShoppingCartOutlined />
-                </Link>
+
+                <a href="/" className="logo">Emporium</a>
+
+                <div className="nav-icon" style={{ position: "relative" }}>
+                    <UserOutlined
+                        onClick={() => setShowLogin((prev) => !prev)}
+                        style={{ cursor: "pointer", fontSize: 20 }}
+                    />
+                    <StarOutlined style={{ marginLeft: 10, fontSize: 20 }} />
+                    <ShoppingCartOutlined style={{ marginLeft: 10, fontSize: 20 }} />
+
+                    {showLogin && (
+                        <div
+                            ref={dropdownRef}
+                            style={{
+                                position: "absolute",
+                                top: "40px",
+                                right: "0",
+                                zIndex: 1000,
+                                background: "#fff",
+                                border: "1px solid #ddd",
+                                borderRadius: "8px",
+                                width: "270px"
+                            }}
+                        >
+                            {!user ? (
+                                <LoginDropdown onClose={() => setShowLogin(false)} />
+                            ) : (
+                                <div style={{ textAlign: "center" }}>
+                                    <p style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                                        Salam, <span style={{ color: "#1890ff" }}>{user}</span>
+                                    </p>
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            setShowLogin(false);
+                                        }}
+                                        style={{
+                                            background: "#f5222d",
+                                            color: "#fff",
+                                            border: "none",
+                                            padding: "8px 16px",
+                                            borderRadius: "4px",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        Çıxış et
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </nav>
-            {/* Bottom Category Grid */}
-            <section className="container bottom-categories" >
+
+            {/* Kateqoriya Grid */}
+            <section className="container bottom-categories">
                 <div className="category-grid">
-                    {categories.map((cat) => (
-                        <a
-                            key={cat.id}
-                            href={`/${cat.slug}`}>
-                            <img
-                                src={images[cat.id % images.length]}
-                                alt={cat.name} />
-                            <div className="category-name" >
-                                {cat.name}
+                    {categories.length === 0
+                        ? Array.from({ length: 6 }).map((_, index) => (
+                            <div key={index} style={{ margin: "10px" }}>
+                                <Skeleton variant="rectangular" width={300} height={250} />
                             </div>
-                        </a>
-                    ))}
+                        ))
+                        : categories.map((cat) => (
+                            <a key={cat.id} href={`/${cat.slug}`}>
+                                <img
+                                    src={images[cat.id % images.length]}
+                                    alt={cat.name}
+                                />
+                                <div className="category-name">{cat.name}</div>
+                            </a>
+                        ))}
                 </div>
             </section>
         </div>
-
     );
 };
 
