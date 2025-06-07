@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../CSS/ProductDetail.css";
-import { UserOutlined, StarOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { UserOutlined, ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
 import ColorSelector from "../components/ColorSelector";
@@ -67,18 +67,13 @@ const ProductDetail = () => {
             </li>
           ))}
         </ul>
-        <a href="/" className="logo">
-          Emporium
-        </a>
-
+        <a href="/" className="logo">Emporium</a>
         <div className="nav-icon" style={{ position: "relative" }}>
-          <UserOutlined
-            onClick={() => setShowLogin((prev) => !prev)}
-            style={{ cursor: "pointer", fontSize: 20 }}
-          />
-          <StarOutlined style={{ marginLeft: 10, fontSize: 20 }} />
+          <UserOutlined onClick={() => setShowLogin((prev) => !prev)} style={{ cursor: "pointer", fontSize: 20 }} />
+          <Link to="/wishlist" style={{ marginLeft: 15, fontSize: 20, color: "inherit" }}>
+            <HeartOutlined />
+          </Link>
           <ShoppingCartOutlined style={{ marginLeft: 10, fontSize: 20 }} />
-
           {showLogin && (
             <div
               ref={dropdownRef}
@@ -145,6 +140,7 @@ const ProductDetail = () => {
                   key={idx}
                   src={img}
                   onClick={() => setCurrentIndex(idx)}
+                  onMouseEnter={() => setCurrentIndex(idx)}
                   className={idx === currentIndex ? "active" : ""}
                   alt={`Thumb ${idx}`}
                 />
@@ -166,9 +162,7 @@ const ProductDetail = () => {
               <p className="description">{product.description}</p>
               <p className="price">Qiymət: ${product.price}</p>
               <p className="discount">Endirim: {product.discount}%</p>
-              <p>
-                <strong>Colors:</strong> {product.Colors?.join(", ")}
-              </p>
+              <p><strong>Colors:</strong> {product.Colors?.join(", ")}</p>
 
               <ColorSelector
                 colors={product.Colors}
@@ -177,21 +171,11 @@ const ProductDetail = () => {
               />
 
               <div className="extra-info">
-                <p>
-                  <strong>Brand:</strong> {product.Brands?.name}
-                </p>
-                <p>
-                  <strong>Category:</strong> {product.category?.name}
-                </p>
-                <p>
-                  <strong>Sub Category:</strong> {product.subcategory?.name}
-                </p>
-                <p>
-                  <strong>Sizes:</strong> {product.Size?.join(", ")}
-                </p>
-                <p>
-                  <strong>Stock:</strong> {product.stock > 0 ? "Mövcuddur" : "Mövcud deyil"}
-                </p>
+                <p><strong>Brand:</strong> {product.Brands?.name}</p>
+                <p><strong>Category:</strong> {product.category?.name}</p>
+                <p><strong>Sub Category:</strong> {product.subcategory?.name}</p>
+                <p><strong>Sizes:</strong> {product.Size?.join(", ")}</p>
+                <p><strong>Stock:</strong> {product.stock > 0 ? "Mövcuddur" : "Mövcud deyil"}</p>
               </div>
             </>
           )}

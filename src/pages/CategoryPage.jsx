@@ -1,21 +1,28 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import { UserOutlined, HeartOutlined, HeartFilled, ShoppingCartOutlined, } from "@ant-design/icons";
+import { useEffect, useState, useContext, useRef } from "react";
+import { WishlistContext } from "../Context/WishListContext";
+import LoginDropdown from "../components/LoginDropdown";
 import { DataContext } from "../Context/DataContext";
 import { AuthContext } from "../Context/AuthContext";
-import { UserOutlined, StarOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import LoginDropdown from "../components/LoginDropdown";
+import { useParams, Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import "../CSS/CategoryPage.css";
+import axios from "axios";
+
+// funksiyada:
 
 const CategoryPage = () => {
+  const { wishlist, toggleWishlist } = useContext(WishlistContext);
   const { slug } = useParams();
   const { categories, loading: categoriesLoading } = useContext(DataContext);
   const { user, logout } = useContext(AuthContext);
+
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const [showFavorites, setShowFavorites] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +40,7 @@ const CategoryPage = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("https://ecommerce.ibradev.me/products/all");
+        const response = await axios.get("https://ecommerce.ibradev.me/products/all?limit=100");
         const allProducts = response.data.data || [];
         const filtered = allProducts.filter(
           (product) => product.categoryId === foundCategory.id
@@ -82,7 +89,9 @@ const CategoryPage = () => {
             onClick={() => setShowLogin((prev) => !prev)}
             style={{ cursor: "pointer", fontSize: 20 }}
           />
-          <StarOutlined style={{ marginLeft: 10, fontSize: 20 }} />
+          <Link to="/wishlist" style={{ marginLeft: 15, fontSize: 20, color: "inherit" }}>
+            <HeartOutlined />
+          </Link>
           <ShoppingCartOutlined style={{ marginLeft: 10, fontSize: 20 }} />
 
           {showLogin && (
@@ -148,10 +157,24 @@ const CategoryPage = () => {
               products.map((product) => (
                 <Link to={`/product/${product.id}`} key={product.id}>
                   <div className="product-card">
+                    <div
+                      className="favorite-icon"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleWishlist(product);
+                      }}
+                    >
+                      {wishlist.find((item) => item.id === product.id) ? (
+                        <HeartFilled style={{ fontSize: 20, color: "red" }} />
+                      ) : (
+                        <HeartOutlined style={{ fontSize: 20, color: "gray" }} />
+                      )}
+                    </div>
+
                     <img src={product.images?.[0]} alt={product.name} />
                     <h3>{product.name}</h3>
                     <p>${product.price}</p>
-                    <p>{product.discount}% Discount</p>
+                    <p>{product.discount}% Endirim</p>
                   </div>
                 </Link>
               ))
@@ -159,6 +182,8 @@ const CategoryPage = () => {
           </div>
         </section>
       </div>
+
+
     </div>
   );
 };

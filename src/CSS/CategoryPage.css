@@ -7,13 +7,12 @@
     padding: 3rem 0;
 }
 
-
 .product-grid a {
     text-decoration: none;
     color: #000;
 }
 
-.product-grid div {
+.product-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,38 +25,36 @@
     height: 100%;
 }
 
-
-.product-grid div:hover {
+.product-card:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* === Məhsul şəkli === */
-.product-grid img {
+.product-card img {
     width: 100%;
     height: 350px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin: 30px 0;
     display: block;
 }
 
 /* === Məhsul adı === */
-.product-grid h3 {
+.product-card h3 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 /* === Məhsul qiyməti === */
-.product-grid p {
+.product-card p {
     font-size: 18px;
     color: #000000;
     margin: 0.5rem 0;
 }
 
-
 /* === Endirim etiketi === */
-.product-grid div p:last-child {
+.product-card p:last-child {
     position: absolute;
     font-size: 16px;
     color: #fff;
@@ -68,15 +65,134 @@
     border-radius: 4px;
 }
 
+/* === Ürək ikonu === */
+.product-card .favorite-icon {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* === Seçilmiş Məhsullar Paneli === */
+.favorites-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.favorites-sidebar h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.favorite-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.favorite-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.favorite-item span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.favorites-sidebar p {
+    font-size: 16px;
+    color: #888;
+}
+
+/* === Navbar Stil === */
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+}
+
+/* === Əsas Content === */
+.main-content {
+    padding: 20px 0;
+}
+
 /* === Responsive Qaydalar === */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+    }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .product-grid {
         grid-template-columns: 1fr;
+    }
+
+    .favorites-sidebar {
+        width: 100%;
+        height: 50vh;
+        top: auto;
+        bottom: 0;
+        border-left: none;
+        border-top: 1px solid #ddd;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-icon {
+        justify-content: flex-start;
+        width: 100%;
     }
 }
