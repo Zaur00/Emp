@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { AuthContext } from "../Context/AuthContext";
 import "../CSS/LoginDropdown.css";
@@ -9,8 +9,10 @@ const LoginDropdown = ({ onClose }) => {
   const { login } = useContext(AuthContext);
 
   const onFinish = (values) => {
-    login(values.email);  // Adı kontekstə əlavə et
-    onClose();            // Dropdown-u bağla
+    // Gələcəkdə burda backend login request gedə bilər
+    login(values.email);
+    message.success("Uğurla daxil oldunuz!");
+    onClose();
   };
 
   return (
@@ -32,7 +34,8 @@ const LoginDropdown = ({ onClose }) => {
           <Input
             prefix={<UserOutlined />}
             placeholder="Email"
-            style={{ width: "100%", height: "40px" }}
+            autoComplete="off"
+            style={{ height: "40px" }}
           />
         </Form.Item>
 
@@ -43,23 +46,30 @@ const LoginDropdown = ({ onClose }) => {
           <Input.Password
             prefix={<LockOutlined />}
             placeholder="Şifrə"
-            style={{ width: "100%", height: "40px" }}
+            autoComplete="off"
+            style={{ height: "40px" }}
           />
         </Form.Item>
 
-        <Form.Item name="remember" noStyle>
+        <Form.Item name="remember" valuePropName="checked">
           <Checkbox>Yadda saxla</Checkbox>
         </Form.Item>
 
-        <Form.Item style={{ marginTop: 16 }}>
+        <Form.Item>
           <Button type="primary" htmlType="submit" block>
             Daxil ol
           </Button>
         </Form.Item>
       </Form>
 
-      <div className="login-links" style={{ marginTop: 10, textAlign: "center" }}>
-        <a href="#!" onClick={() => alert("Şifrəni unutmusunuz?")}>
+      <div className="login-links" style={{ textAlign: "center" }}>
+        <a
+          href="#!"
+          onClick={(e) => {
+            e.preventDefault();
+            message.info("Şifrəni bərpa etmə funksiyası hazır deyil.");
+          }}
+        >
           Şifrəni unutmusan?
         </a>
         <br />

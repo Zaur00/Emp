@@ -1,0 +1,134 @@
+/* CONTAINER & NAVBAR */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 0; /* Add 60px padding-top to push the content down */
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 68.5%;
+  background-color: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px; /* Ensure height of navbar */
+  padding: 0 20px; /* Add padding for left and right */
+}
+
+/* LOGO */
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+  font-family: 'Times New Roman', Times, serif;
+  text-decoration: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+}
+
+/* ICONS */
+.nav-icon {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  z-index: 10001;
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  z-index: 10001;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* DROPDOWN */
+.login-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 270px;
+  padding: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    padding: 80px 20px 20px; /* Increase padding-top for mobile */
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .nav-links.hide {
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    padding: 15px 0;
+    font-size: 20px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .nav-icon {
+    display: flex;
+  }
+}

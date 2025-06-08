@@ -1,13 +1,11 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../CSS/ProductDetail.css";
-import { UserOutlined, ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
-import { DataContext } from "../Context/DataContext";
-import { AuthContext } from "../Context/AuthContext";
-import ColorSelector from "../components/ColorSelector";
-import LoginDropdown from "../components/LoginDropdown";
 import Skeleton from "@mui/material/Skeleton";
+import { DataContext } from "../Context/DataContext";
+import ColorSelector from "../components/ColorSelector";
+import Navbar from "../components/Navbar";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -15,10 +13,7 @@ const ProductDetail = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const { categories } = useContext(DataContext);
-  const { user, logout } = useContext(AuthContext);
   const [selectedColor, setSelectedColor] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
-  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -36,16 +31,6 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowLogin(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const handlePrev = () => {
     if (!product) return;
     setCurrentIndex((prev) => (prev === 0 ? product.images.length - 1 : prev - 1));
@@ -58,67 +43,8 @@ const ProductDetail = () => {
 
   return (
     <div>
-      {/* Navbar */}
-      <nav className="container navbar">
-        <ul className="nav-links">
-          {categories.map((cat) => (
-            <li key={cat.id}>
-              <Link to={`/${cat.slug}`}>{cat.name}</Link>
-            </li>
-          ))}
-        </ul>
-        <a href="/" className="logo">Emporium</a>
-        <div className="nav-icon" style={{ position: "relative" }}>
-          <UserOutlined onClick={() => setShowLogin((prev) => !prev)} style={{ cursor: "pointer", fontSize: 20 }} />
-          <Link to="/wishlist" style={{ marginLeft: 15, fontSize: 20, color: "inherit" }}>
-            <HeartOutlined />
-          </Link>
-          <ShoppingCartOutlined style={{ marginLeft: 10, fontSize: 20 }} />
-          {showLogin && (
-            <div
-              ref={dropdownRef}
-              style={{
-                position: "absolute",
-                top: "40px",
-                right: "0",
-                zIndex: 1000,
-                background: "#fff",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                width: "270px",
-              }}
-            >
-              {!user ? (
-                <LoginDropdown onClose={() => setShowLogin(false)} />
-              ) : (
-                <div style={{ textAlign: "center" }}>
-                  <p style={{ marginBottom: "10px", fontWeight: "bold" }}>
-                    Salam, <span style={{ color: "#1890ff" }}>{user}</span>
-                  </p>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setShowLogin(false);
-                    }}
-                    style={{
-                      background: "#f5222d",
-                      color: "#fff",
-                      border: "none",
-                      padding: "8px 16px",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Çıxış et
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </nav>
+      <Navbar categories={categories} />
 
-      {/* Məhsul Detalları */}
       <div className="product-detail-container">
         <div className="product-gallery">
           <div className="slider-wrapper">

@@ -120,31 +120,6 @@
     color: #888;
 }
 
-/* === Navbar Stil === */
-.navbar {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 20px 0;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links li a {
-    color: #333;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.nav-icon {
-    display: flex;
-    align-items: center;
-}
-
 /* === Əsas Content === */
 .main-content {
     padding: 20px 0;
@@ -152,47 +127,38 @@
 
 /* === Responsive Qaydalar === */
 @media (max-width: 1024px) {
+
+    .content {
+        width: 80%;
+        padding: 50px;
+        /* Mobil üçün artırılmış yuxarı padding */
+    }
+
     .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+
+        /* İki sütunlu görünüş */
     }
 
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
 
-    .nav-links {
-        flex-wrap: wrap;
-    }
 }
+
 
 @media (max-width: 768px) {
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        /* Tək sütun – mobil üçün */
     }
 
     .favorites-sidebar {
         width: 100%;
+        /* Mobil ekranın eninə uyğun */
         height: 50vh;
+        /* Yarım ekran boyu */
         top: auto;
+        /* Yuxarıdan yox, aşağıdan çıxacaq */
         bottom: 0;
         border-left: none;
         border-top: 1px solid #ddd;
-    }
-
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-icon {
-        justify-content: flex-start;
-        width: 100%;
     }
 }

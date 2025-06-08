@@ -1,29 +1,21 @@
-import { UserOutlined, HeartOutlined, HeartFilled, ShoppingCartOutlined, } from "@ant-design/icons";
-import { useEffect, useState, useContext, useRef } from "react";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { useEffect, useState, useContext } from "react";
 import { WishlistContext } from "../Context/WishListContext";
-import LoginDropdown from "../components/LoginDropdown";
 import { DataContext } from "../Context/DataContext";
-import { AuthContext } from "../Context/AuthContext";
 import { useParams, Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
-import "../CSS/CategoryPage.css";
 import axios from "axios";
-
-// funksiyada:
+import Navbar from "../components/Navbar";
+import "../CSS/CategoryPage.css";
 
 const CategoryPage = () => {
   const { wishlist, toggleWishlist } = useContext(WishlistContext);
   const { slug } = useParams();
   const { categories, loading: categoriesLoading } = useContext(DataContext);
-  const { user, logout } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
-  const [favorites, setFavorites] = useState([]);
-  const [showFavorites, setShowFavorites] = useState(false);
-  const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (categoriesLoading) return;
@@ -35,6 +27,7 @@ const CategoryPage = () => {
       setLoading(false);
       return;
     }
+
     setCategory(foundCategory);
 
     const fetchProducts = async () => {
@@ -56,89 +49,10 @@ const CategoryPage = () => {
     fetchProducts();
   }, [slug, categories, categoriesLoading]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowLogin(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
     <div>
-      {/* Navbar */}
-      <nav className="container navbar">
-        <ul className="nav-links">
-          {categoriesLoading ? (
-            <li>Yüklənir...</li>
-          ) : (
-            categories.map((cat) => (
-              <li key={cat.id}>
-                <Link to={`/${cat.slug}`}>{cat.name}</Link>
-              </li>
-            ))
-          )}
-        </ul>
+      <Navbar categories={categories} />
 
-        <a href="/" className="logo">Emporium</a>
-
-        <div className="nav-icon" style={{ position: "relative" }}>
-          <UserOutlined
-            onClick={() => setShowLogin((prev) => !prev)}
-            style={{ cursor: "pointer", fontSize: 20 }}
-          />
-          <Link to="/wishlist" style={{ marginLeft: 15, fontSize: 20, color: "inherit" }}>
-            <HeartOutlined />
-          </Link>
-          <ShoppingCartOutlined style={{ marginLeft: 10, fontSize: 20 }} />
-
-          {showLogin && (
-            <div
-              ref={dropdownRef}
-              style={{
-                position: "absolute",
-                top: "40px",
-                right: "0",
-                zIndex: 1000,
-                background: "#fff",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                width: "270px"
-              }}
-            >
-              {!user ? (
-                <LoginDropdown onClose={() => setShowLogin(false)} />
-              ) : (
-                <div style={{ textAlign: "center" }}>
-                  <p style={{ marginBottom: "10px", fontWeight: "bold" }}>
-                    Salam, <span style={{ color: "#1890ff" }}>{user}</span>
-                  </p>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setShowLogin(false);
-                    }}
-                    style={{
-                      background: "#f5222d",
-                      color: "#fff",
-                      border: "none",
-                      padding: "8px 16px",
-                      borderRadius: "4px",
-                      cursor: "pointer"
-                    }}
-                  >
-                    Çıxış et
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </nav>
-
-      {/* Main Content */}
       <div className="container main-content">
         <section className="content">
           <div className="product-grid">
@@ -182,8 +96,6 @@ const CategoryPage = () => {
           </div>
         </section>
       </div>
-
-
     </div>
   );
 };
