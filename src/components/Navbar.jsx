@@ -2,14 +2,18 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserOutlined, ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
 import { AuthContext } from "../Context/AuthContext";
+import { CartContext } from "../Context/CartContext"; // Yeni: səbət konteksti
 import LoginDropdown from "./LoginDropdown";
-import "../CSS/Navbar.css"; // Assuming you have a CSS file for styling
+import CartSideBar from "./CartSideBar"; // Yeni: səbət sidebar komponenti
+import "../CSS/Navbar.css";
 
 const Navbar = ({ categories = [] }) => {
     const [showLogin, setShowLogin] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const dropdownRef = useRef(null);
     const { user, logout } = useContext(AuthContext);
+    const { cartItems, removeFromCart } = useContext(CartContext); // Yeni: səbət məlumatı
+    const [cartOpen, setCartOpen] = useState(false); // Bunu saxla
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -26,8 +30,8 @@ const Navbar = ({ categories = [] }) => {
     };
 
     return (
-        // <div className="container">
-            <nav className="navbar container ">
+        <>
+            <nav className="navbar container">
                 <div className="hamburger" onClick={toggleMenu}>&#9776;</div>
 
                 <Link to="/" className="logo">Emporium</Link>
@@ -54,7 +58,11 @@ const Navbar = ({ categories = [] }) => {
                     <Link to="/wishlist" style={{ marginLeft: 15, fontSize: 20, color: "inherit" }}>
                         <HeartOutlined />
                     </Link>
-                    <ShoppingCartOutlined style={{ marginLeft: 10, fontSize: 20 }} />
+                    <ShoppingCartOutlined
+                        style={{ marginLeft: 10, fontSize: 20 }}
+                        onClick={() => setCartOpen((prev) => !prev)}
+                    />
+
 
                     {showLogin && (
                         <div ref={dropdownRef} className="login-dropdown">
@@ -87,7 +95,16 @@ const Navbar = ({ categories = [] }) => {
                     )}
                 </div>
             </nav>
-        // </div>
+
+            {/* Səbət Sidebari */}
+            {cartOpen && (
+                <CartSideBar
+                    cartItems={cartItems}
+                    onClose={() => setCartOpen(false)} // Yəni sidebar içindən də bağlana bilir
+                    removeFromCart={removeFromCart}
+                />
+            )}
+        </>
     );
 };
 

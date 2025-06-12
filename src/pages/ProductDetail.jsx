@@ -4,8 +4,12 @@ import axios from "axios";
 import "../CSS/ProductDetail.css";
 import Skeleton from "@mui/material/Skeleton";
 import { DataContext } from "../Context/DataContext";
+import { WishlistContext } from "../Context/WishListContext";
+import { CartContext } from "../Context/CartContext";
 import ColorSelector from "../components/ColorSelector";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -14,6 +18,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const { categories } = useContext(DataContext);
   const [selectedColor, setSelectedColor] = useState(null);
+  const navigate = useNavigate();
+  const { toggleWishlist, wishlist } = useContext(WishlistContext);
+  const { addToCart, isInCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,15 +38,7 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  const handlePrev = () => {
-    if (!product) return;
-    setCurrentIndex((prev) => (prev === 0 ? product.images.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    if (!product) return;
-    setCurrentIndex((prev) => (prev === product.images.length - 1 ? 0 : prev + 1));
-  };
+  const isInWishlist = wishlist.some((item) => item.id === product?.id);
 
   return (
     <div>
@@ -103,9 +102,41 @@ const ProductDetail = () => {
                 <p><strong>Sizes:</strong> {product.Size?.join(", ")}</p>
                 <p><strong>Stock:</strong> {product.stock > 0 ? "Mövcuddur" : "Mövcud deyil"}</p>
               </div>
+
+              {/* ⭐️ ƏMƏLİYYAT DÜYMƏLƏRİ */}
+              <div className="product-actions">
+                {isInCart(product.id, product.Size?.[0]) ? (
+                  <button className="go-to-cart" onClick={() => navigate("/cart")}>
+                    SƏBƏTƏ KEÇ
+                  </button>
+                ) : (
+                  <button
+                    className="add-to-cart"
+                    onClick={() =>
+                      addToCart({
+                        id: product.id,
+                        name: product.name,
+                        image: product.images?.[0],
+                        price: product.price,
+                        size: product.Size?.[0],
+                        quantity: 1,
+                      })
+                    }
+                  >
+                    SƏBƏTƏ ƏLAVƏ ET
+                  </button>
+                )}
+                <button
+                  className="add-to-wishlist"
+                  onClick={() => toggleWishlist(product)}
+                >
+                  {isInWishlist ? "SEÇİLMİŞDƏDİR" : "SEÇİLMİŞLƏRƏ ƏLAVƏ ET"}
+                </button>
+              </div>
             </>
           )}
         </div>
+
       </div>
     </div>
   );
