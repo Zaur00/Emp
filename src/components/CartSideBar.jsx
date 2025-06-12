@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import { Link } from "react-router-dom";
-import "../CSS/CartSidebar.css"; // Stil faylı ayrıca izah ediləcək
+import "../CSS/CartSideBar.css"; // Stil faylı ayrıca izah ediləcək
 
-const CartSidebar = ({ isOpen, onClose }) => {
+const CartSideBar = ({ isOpen, onClose }) => {
   const { cartItems, removeFromCart } = useContext(CartContext);
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -52,4 +52,4 @@ const CartSidebar = ({ isOpen, onClose }) => {
   );
 };
 
-export default CartSidebar;
+export default CartSideBar;

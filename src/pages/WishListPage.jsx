@@ -3,7 +3,8 @@ import { WishlistContext } from "../Context/WishListContext";
 import { Link } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
 import Navbar from "../components/Navbar";
-import "../CSS/WishListPage.css"; // Stil faylı ayrıca izah ediləcək
+import "../CSS/WishListPage.css"; 
+
 const WishlistPage = () => {
   const { wishlist, toggleWishlist } = useContext(WishlistContext);
   const [categories, setCategories] = useState([]);
