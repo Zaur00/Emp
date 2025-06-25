@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Navbar from "../components/Navbar";
 import "../CSS/Home.css";
-
+import HomeSection from "../components/HomeSection";
+import NewsletterSection from "../components/NewsletterSection";
+import Footer from "../components/Footer";
 const Home = () => {
     const [categories, setCategories] = useState([]);
 
@@ -42,6 +44,9 @@ const Home = () => {
                         ))}
                 </div>
             </section>
+            <HomeSection />
+            <NewsletterSection />
+            <Footer />
         </div>
     );
 };

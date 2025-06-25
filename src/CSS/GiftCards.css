@@ -1,0 +1,83 @@
+.giftcards-container {
+  font-family: "Arial", sans-serif;
+  color: #111;
+  margin: 60px auto;
+}
+
+.giftcards-hero img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+
+.giftcards-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.giftcards-content h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.giftcards-tabs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.giftcards-tabs ul li {
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+.giftcards-tabs ul li.active {
+  border-bottom: 2px solid #000;
+}
+
+.giftcards-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.giftcards-left {
+  flex: 2;
+  min-width: 300px;
+}
+
+.giftcards-left ul {
+  padding-left: 20px;
+}
+
+.giftcards-left ul li {
+  margin-bottom: 10px;
+}
+
+.giftcards-right {
+  flex: 1;
+  min-width: 250px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.whatsapp-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 16px;
+  background-color: #fff;
+  border: 1px solid #000;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

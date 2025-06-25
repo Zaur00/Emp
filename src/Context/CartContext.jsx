@@ -1,9 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-
-// Kontekst yaradılır
 export const CartContext = createContext();
 
-// Provider komponenti
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState(() => {
         const savedCart = localStorage.getItem("cart");
@@ -14,7 +11,6 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    // Məhsul əlavə etmək
     const addToCart = (product) => {
         setCartItems((prevItems) => {
             const existingItem = prevItems.find(
@@ -33,7 +29,6 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-    // Məhsulu səbətdən silmək
     const removeFromCart = (productId, size) => {
         setCartItems((prevItems) =>
             prevItems.filter(
@@ -42,19 +37,16 @@ export const CartProvider = ({ children }) => {
         );
     };
 
-    // Səbəti təmizləmək
     const clearCart = () => {
         setCartItems([]);
     };
 
-    // Məhsul səbətdə varmı?
     const isInCart = (productId, size = null) => {
         return cartItems.some((item) =>
             size ? (item.id === productId && item.size === size) : item.id === productId
         );
     };
 
-    // Ümumi məbləğ
     const totalAmount = cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0

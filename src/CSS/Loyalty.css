@@ -1,0 +1,95 @@
+.loyalty-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    color: #111;
+    margin: 60px auto;
+}
+
+/* Banner */
+.loyalty-banner img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+
+}
+
+/* Content Wrapper */
+.loyalty-content {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+.sidebar-ul-common {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sidebar-ul-common li {
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.sidebar-ul-common li a {
+    text-decoration: none;
+    color: #111;
+    transition: 0.3s;
+}
+
+.sidebar-ul-common li a:hover {
+    color: #d62828;
+}
+
+.sidebar-ul-common .active {
+    font-weight: bold;
+    border-bottom: 2px solid #111;
+}
+
+/* Text Content */
+.loyalty-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.loyalty-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.loyalty-content ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.loyalty-content li {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Buttons */
+.loyalty-btns {
+    margin-top: 30px;
+}
+
+.loyalty-whatsapp {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.loyalty-whatsapp:hover {
+    background-color: #444;
+}
