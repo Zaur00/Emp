@@ -6,7 +6,6 @@
     margin: 60px auto;
 }
 
-/* Banner */
 .loyalty-banner img {
     width: 100%;
     max-height: 450px;
@@ -14,7 +13,6 @@
 
 }
 
-/* Content Wrapper */
 .loyalty-content {
     max-width: 1000px;
     margin: 40px auto;
@@ -53,7 +51,6 @@
     border-bottom: 2px solid #111;
 }
 
-/* Text Content */
 .loyalty-content h2 {
     font-size: 24px;
     margin-bottom: 20px;
