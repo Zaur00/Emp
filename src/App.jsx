@@ -21,6 +21,9 @@ import GiftCards from "./pages/GiftCards";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/Faq";
 import Loyalty from "./pages/Loyalty";
+import Delivery from "./pages/Delivery";
+import Payment from "./pages/Payment";
+import Returns from "./pages/Returns";
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -51,6 +54,9 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/loyalty" element={<Loyalty />} />
+                <Route path="/delivery" element={<Delivery/>}/>
+                <Route path="/payment" element={<Payment/>}/>
+                <Route path="/returns" element={<Returns/>}/>
               </Routes>
               <HomeSection />
               <NewsletterSection />

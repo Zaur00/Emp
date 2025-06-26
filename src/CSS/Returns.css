@@ -1,0 +1,114 @@
+/* Ana konteyner */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #111;
+  width: 1200px ;
+  margin: 0 auto;
+}
+
+/* Hero Şəkil */
+.faq-hero img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-top: 60px;
+}
+
+/* Başlıq */
+.faq-container h2 {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: left;
+  margin-top: 30px;
+}
+
+/* Naviqasiya menyusu */
+.faq-sidebar {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.sidebar-ul-common {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 35px;
+  font-size: 13px;
+}
+
+.sidebar-ul-common li a,
+.sidebar-ul-common li {
+  text-decoration: none;
+  color: #111;
+  font-weight: 400;
+  position: relative;
+  cursor: pointer;
+}
+
+.sidebar-ul-common .active {
+  font-weight: 600;
+  border-bottom: 2px solid #111;
+}
+
+/* Kontent bölməsi */
+.faq-body {
+  display: flex;
+  max-width: 1200px;
+  margin: 30px auto 60px;
+  gap: 80px;
+  padding: 0 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Sol - əsas kontent */
+.faq-main {
+  flex: 3;
+}
+
+.faq-main p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.faq-main ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.faq-main li {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Sağ - yardım bloku */
+.faq-help {
+  flex: 1;
+  font-size: 14px;
+}
+
+.faq-help p {
+  margin-bottom: 12px;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+  background-color: black;
+  color: white;
+}

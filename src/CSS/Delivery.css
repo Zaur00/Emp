@@ -1,0 +1,119 @@
+.delivery-container {
+  font-family: Arial, sans-serif;
+  color: #111;
+  margin: 60px auto;
+}
+
+/* Hero Banner */
+.delivery-hero-banner img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Başlıq */
+.delivery-title {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Naviqasiya menyusu */
+.delivery-nav {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 40px;
+}
+
+.delivery-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
+}
+
+.delivery-nav li,
+.delivery-nav a {
+  font-size: 13px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  padding-bottom: 6px;
+  transition: 0.3s;
+}
+
+.delivery-nav .active {
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
+.delivery-nav a:hover {
+  font-weight: bold;
+}
+
+/* Layout */
+.delivery-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Sol tərəf */
+.delivery-left {
+  flex: 2;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.delivery-left ul {
+  margin-left: 20px;
+  list-style: disc;
+  margin-bottom: 20px;
+}
+
+.delivery-left p {
+  margin-bottom: 20px;
+}
+
+/* Sağ tərəf */
+.delivery-right {
+  flex: 1;
+  border-radius: 6px;
+  padding: 20px;
+  background-color: transparent;
+  text-align: center;
+  font-size: 14px;
+}
+
+.delivery-right h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+  background-color: black;
+  color: white;
+}

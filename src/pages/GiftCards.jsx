@@ -1,68 +1,67 @@
 import React from "react";
-import "../CSS/GiftCards.css";
-import { FaWhatsapp } from "react-icons/fa6";
+import "../CSS/FAQ.css"; // Eyni CSS-i istifadə edirik
 import { Link } from "react-router-dom";
-
+import { FaWhatsapp } from "react-icons/fa6";
 
 const GiftCards = () => {
-    return (
-        <div className="giftcards-container">
-            <div className="giftcards-hero">
-                <img
-                    src="https://www.emporium.az/assets/images/pages/gift-coupon-large.jpg"
-                    alt="Hədiyyə Kartı Banner"
-                />
-            </div>
+  return (
+    <>
+      <div className="faq-hero">
+        <img
+          src="https://www.emporium.az/assets/images/pages/gift-coupon-large.jpg"
+          alt="Hədiyyə Kartı Banner"
+        />
+      </div>
 
-            <div className="giftcards-content">
-                <h1>Hədiyyə kartları</h1>
+      <div className="faq-container">
+        <h2>Hədiyyə kartları</h2>
 
-                <div className="giftcards-tabs">
-                    <ul>
-                        <Link to="/contact">Əlaqə</Link>
-                        <Link to="/faq">Ən çox soruşulan suallar</Link >
-                        <Link to="/loyalty">Loyallıq Proqramı </Link>
-                        <Link to="/delivery">Çatdırılma şərtləri</Link>
-                        <Link to="/payment">Ödəmə üsulları </Link>
-                        <Link to="/returns">Geri qaytarılma və dəyişdirmə </Link>
-                        <li className="active">Hədiyyə kartları</li>
-                    </ul >
-                </div >
+        <aside className="faq-sidebar">
+          <ul className="sidebar-ul-common">
+            <li><Link to="/contact">Əlaqə</Link></li>
+            <li><Link to="/faq">Ən çox soruşulan suallar</Link></li>
+            <li><Link to="/loyalty">Loyallıq Proqramı</Link></li>
+            <li><Link to="/delivery">Çatdırılma şərtləri</Link></li>
+            <li><Link to="/payment">Ödəmə üsulları</Link></li>
+            <li><Link to="/returns">Geri qaytarılma və dəyişdirmə</Link></li>
+            <li className="active">Hədiyyə kartları</li>
+          </ul>
+        </aside>
 
-                <div className="giftcards-info">
-                    <div className="giftcards-left">
-                        <p>
-                            Bayram və özəl günlərdə kart ən yaxşı hədiyyədir! Bu kart vasitəsilə Siz həm
-                            mağazalarımızda, həm də onlayn sifarişlərdə alış-veriş edə bilərsiniz. 100 azn-dən
-                            başlayan istənilən dəyərdə kart sifariş edə bilərsiniz.
-                        </p>
+        <div className="faq-body">
+          <main className="faq-main">
+            <p>
+              Bayram və özəl günlərdə kart ən yaxşı hədiyyədir! Bu kart vasitəsilə Siz həm
+              mağazalarımızda, həm də onlayn sifarişlərdə alış-veriş edə bilərsiniz.
+              100 azn-dən başlayan istənilən dəyərdə kart sifariş edə bilərsiniz.
+            </p>
 
-                        <h4>Hədiyyə kartlarından istifadə qaydaları:</h4>
-                        <ul>
-                            <li>Hədiyyə kartını veb-saytımızdan və uyğun mağazalarımızdan əldə etdikdən sonra, alış-veriş zamanı bu kartı təqdim edərək istifadə edə bilərsiniz.</li>
-                            <li>Hədiyyə kartı müştərinin adına rəsmiləşdirilir və kartın balansı artırılır.</li>
-                            <li>Balans tam istifadə olunduqdan sonra kart deaktiv olur.</li>
-                            <li>Qaytarılmış məhsullar zamanı balans bərpa olunmur.</li>
-                            <li>Nağd pula çevrilmir və itmə zamanı məsuliyyət daşınmır.</li>
-                        </ul>
-                    </div>
+            <h4>Hədiyyə kartlarından istifadə qaydaları:</h4>
+            <ul>
+              <li>Hədiyyə kartını veb-saytımızdan və uyğun mağazalarımızdan əldə etdikdən sonra, alış-veriş zamanı bu kartı təqdim edərək istifadə edə bilərsiniz.</li>
+              <li>Hədiyyə kartı müştərinin adına rəsmiləşdirilir və kartın balansı artırılır.</li>
+              <li>Balans tam istifadə olunduqdan sonra kart deaktiv olur.</li>
+              <li>Qaytarılmış məhsullar zamanı balans bərpa olunmur.</li>
+              <li>Nağd pula çevrilmir və itmə zamanı məsuliyyət daşınmır.</li>
+            </ul>
+          </main>
 
-                    <div className="giftcards-right">
-                        <h4>Kömək lazımdır?</h4>
-                        <p>+994 51 225 96 96 nömrəsinə zəng edin</p>
-                        <a
-                            href="https://wa.me/994512259696"
-                            className="whatsapp-button"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <span><FaWhatsapp /></span> BİZƏ MESAJ GÖNDƏR
-                        </a>
-                    </div>
-                </div>
-            </div >
-        </div >
-    );
+          <aside className="faq-help">
+            <p><strong>Kömək lazımdır?</strong></p>
+            <p>+994 51 225 96 96 nömrəsinə zəng edin</p>
+            <a
+              href="https://wa.me/994512259696"
+              target="_blank"
+              className="whatsapp-btn"
+              rel="noreferrer"
+            >
+              <FaWhatsapp /> BİZƏ MESAJ GÖNDƏR
+            </a>
+          </aside>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default GiftCards;

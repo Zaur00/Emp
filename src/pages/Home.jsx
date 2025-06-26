@@ -43,10 +43,7 @@ const Home = () => {
                             </a>
                         ))}
                 </div>
-            </section>
-            <HomeSection />
-            <NewsletterSection />
-            <Footer />
+            </section>            
         </div>
     );
 };

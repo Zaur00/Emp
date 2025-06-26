@@ -1,83 +1,126 @@
 .giftcards-container {
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
   color: #111;
+  display: flex;
+  flex-direction: column;
   margin: 60px auto;
 }
 
+/* Hero banner */
 .giftcards-hero img {
   width: 100%;
   max-height: 450px;
   object-fit: cover;
 }
 
+/* Naviqasiya menyusu */
+.giftcards-tabs ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  list-style: none;
+  margin: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.giftcards-tabs ul a,
+.giftcards-tabs ul li {
+  font-size: 14px;
+  padding: 8px 12px;
+  color: #111;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.giftcards-tabs ul a:hover {
+  color: #d62828;
+}
+
+.giftcards-tabs ul .active {
+  font-weight: bold;
+  border-bottom: 2px solid #111;
+}
+
+/* Content Layout */
 .giftcards-content {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  margin: auto;
+  padding: 0 20px;
 }
 
 .giftcards-content h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 26px;
+  margin-bottom: 30px;
+  text-align: left;
 }
 
-.giftcards-tabs ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.giftcards-tabs ul li {
-  cursor: pointer;
-  padding-bottom: 5px;
-}
-
-.giftcards-tabs ul li.active {
-  border-bottom: 2px solid #000;
-}
-
+/* Info Grid */
 .giftcards-info {
   display: flex;
-  flex-wrap: wrap;
   gap: 40px;
-  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .giftcards-left {
-  flex: 2;
-  min-width: 300px;
+  flex: 3;
+}
+
+.giftcards-left p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.giftcards-left h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
 }
 
 .giftcards-left ul {
+  list-style: disc;
   padding-left: 20px;
 }
 
 .giftcards-left ul li {
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
+/* Kömək sağ hissə */
 .giftcards-right {
   flex: 1;
-  min-width: 250px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 6px;
+  min-width: 220px;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.giftcards-right h4 {
+  margin-bottom: 10px;
+}
+
+.giftcards-right p {
+  margin-bottom: 12px;
 }
 
 .whatsapp-button {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 16px;
-  background-color: #fff;
-  border: 1px solid #000;
-  text-decoration: none;
-  font-weight: 500;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 10px 18px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  border-radius: 3px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.whatsapp-button:hover {
+  background-color: black;
+  color: white;
 }
