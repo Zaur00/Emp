@@ -9,7 +9,6 @@ const LoginDropdown = ({ onClose }) => {
   const { login } = useContext(AuthContext);
 
   const onFinish = (values) => {
-    // Gələcəkdə burda backend login request gedə bilər
     login(values.email);
     message.success("Uğurla daxil oldunuz!");
     onClose();

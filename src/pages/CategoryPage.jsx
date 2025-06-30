@@ -40,7 +40,7 @@ const CategoryPage = () => {
         );
         setProducts(filtered);
       } catch (error) {
-        console.error("Məhsulları yükləmə zamanı xəta:", error);
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
@@ -66,7 +66,7 @@ const CategoryPage = () => {
                 </div>
               ))
             ) : products.length === 0 ? (
-              <p>Bu kateqoriyada məhsul tapılmadı.</p>
+              <p>No products found in this category..</p>
             ) : (
               products.map((product) => (
                 <Link to={`/product/${product.id}`} key={product.id}>

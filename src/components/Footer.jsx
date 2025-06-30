@@ -15,57 +15,57 @@ const Footer = () => {
         <div className="container">
             <footer className="footer">
                 <div className="footer-top">
-                    <div className="info-box"> <SiContactlesspayment /> Güvənli ödəniş üsulları</div>
-                    <div className="info-box"> <TbTruckDelivery /> Sürətli çatdırılma</div>
-                    <div className="info-box"> <TbTruckReturn /> Sifarişin sürətli və asan qaytarılması</div>
+                    <div className="info-box"> <SiContactlesspayment /> SAFE & EASY PAYMENTS</div>
+                    <div className="info-box"> <TbTruckDelivery /> Express delivery</div>
+                    <div className="info-box"> <TbTruckReturn /> Quick & easy returns </div>
                 </div>
 
                 <div className="footer-links">
                     <div>
                         <h4>EMPORİUM</h4>
                         <ul>
-                            <li><Link to="/about">Haqqımızda</Link></li>
-                            <li><Link to="/store">Mağaza Haqqında</Link></li>
+                            <li><Link to="/about">About Us</Link></li>
+                            <li><Link to="/store">Store Information</Link></li>
                         </ul>
 
                     </div>
 
                     <div>
-                        <h4>MÜŞTƏRİ XİDMƏTİ</h4>
+                        <h4>CUSTOMER SERVICE</h4>
                         <ul>
-                            <li><Link to="/gift-cards">Hədiyyə Kartları</Link></li>
-                            <li><Link to="/loyalty">Loyalılıq Proqramı</Link></li>
-                            <li><Link to="/faq">Ən Çox Soruşulan Suallar</Link></li>
-                            <li><Link to="/contact">Əlaqə</Link></li>
+                            <li><Link to="/gift-cards">Gify Cards</Link></li>
+                            <li><Link to="/loyalty">Loyalty</Link></li>
+                            <li><Link to="/faq">FAQ</Link></li>
+                            <li><Link to="/contact">Contact Us</Link></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4>ONLINE ALIŞ-VERİŞ</h4>
+                        <h4>ONLINE SHOPPING</h4>
                         <ul>
-                            <li><Link to="/delivery">Çatdırılma Şərtləri</Link></li>
-                            <li><Link to="/returns">Geri Qaytarılma və Dəyişdirmə</Link></li>
-                            <li><Link to="/payment">Ödəmə Üsulları</Link></li>
+                            <li><Link to="/delivery">DELIVERY TERMS</Link></li>
+                            <li><Link to="/returns">RETURN AND EXCHANGE</Link></li>
+                            <li><Link to="/payment">PAYMENT METHODS</Link></li>
                         </ul>
                     </div>
 
 
                     <div>
-                        <h4>ƏLAQƏ</h4>
+                        <h4>STORE CONTACT</h4>
                         <ul>
                             <li>+994 51 225 96 96</li>
-                            <li>Neftçilər Prospekti 51, 153</li>
+                            <li>NEFTCHILER AVENUE 51, 153</li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4>ÖDƏNİŞ</h4>
+                        <h4>EMPORIUM ACCEPTS</h4>
                         <div className="payments">
                             <span><LiaCcMastercard /></span>
                             <span><FaCcMastercard /></span>
                             <span><FaCcVisa /> </span>
                         </div>
-                        <h4>SOSİAL MEDİA</h4>
+                        <h4>SOCIAL MEDIA</h4>
                         <div className="social">
                             <span><FaFacebookF /></span>
                             <span>< FaInstagram /></span>

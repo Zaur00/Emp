@@ -8,6 +8,8 @@
 }
 
 .product-gallery {
+  display: flex;
+  gap: 1rem;
   flex: 1;
   min-width: 300px;
 }
@@ -20,8 +22,8 @@
 
 .thumbnail-list {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  margin-top: 1rem;
 }
 
 .thumbnail-list img {
@@ -88,4 +90,17 @@
 .add-to-wishlist:hover {
   background-color: black;
   color: white;
+}
+.size-guide-link {
+  margin-left: 10px;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+}
+
+.size-guide-link:hover {
+  color: #666;
 }
