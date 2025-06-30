@@ -51,7 +51,7 @@ const Navbar = ({ categories = [], allProducts = [] }) => {
         <div className="nav-left">
           <div className="hamburger">&#9776;</div>
           <ul className={`nav-links ${menuOpen ? "show" : "hide"}`}></ul>
-          
+
         </div>
         <div className="hamburger" onClick={toggleMenu}>
           &#9776;
@@ -60,7 +60,6 @@ const Navbar = ({ categories = [], allProducts = [] }) => {
         <Link to="/" className="logo">
           Emporium
         </Link>
-
         <ul className={`nav-links ${menuOpen ? "show" : "hide"}`}>
           {categories.length === 0 ? (
             <li>Loading...</li>
@@ -74,7 +73,6 @@ const Navbar = ({ categories = [], allProducts = [] }) => {
             ))
           )}
         </ul>
-
         <div className="nav-right">
           <div className="nav-search-lang">
             <select
