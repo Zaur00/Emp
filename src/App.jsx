@@ -34,13 +34,33 @@ function App() {
       .then((data) => setCategories(data));
   }, []);
 
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    fetch("https://ecommerce.ibradev.me/brands/all") // Sənin brend endpointin
+      .then((res) => res.json())
+      .then((data) => setBrands(data));
+  }, []);
+
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://ecommerce.ibradev.me/products/all?limit=100")
+      .then((res) => res.json())
+      .then((data) => setAllProducts(data));
+  }, []);
+
   return (
     <Router>
       <AuthProvider>
         <DataProvider>
           <WishlistProvider>
             <CartProvider>
-              <Navbar categories={categories} />
+              <Navbar
+                categories={categories}
+                allProducts={allProducts}
+                brands={brands}
+              />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/registration" element={<Registration />} />
@@ -54,9 +74,9 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/loyalty" element={<Loyalty />} />
-                <Route path="/delivery" element={<Delivery/>}/>
-                <Route path="/payment" element={<Payment/>}/>
-                <Route path="/returns" element={<Returns/>}/>
+                <Route path="/delivery" element={<Delivery />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/returns" element={<Returns />} />
               </Routes>
               <HomeSection />
               <NewsletterSection />

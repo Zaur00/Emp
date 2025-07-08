@@ -1,7 +1,7 @@
 /* CONTAINER */
 .container {
   width: 1300px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 /* NAVBAR */
@@ -19,25 +19,29 @@
   height: 60px;
 }
 
-/* LOGO */
+
 .navbar .logo {
   font-size: 22px;
   font-weight: bold;
   color: #000;
-  font-family: 'Times New Roman', Times, serif;
   text-decoration: none;
-  /* position: absolute;
-  left: 50%; */
   transform: translateX(-50%);
   z-index: 10001;
 }
 
-/* .nav-links {
-  position: absolute;
-  left: 10%;
-} */
+@font-face {
+  font-family: "EmporiumLogo";
+  src: url("../assets/Montserrat-Ace-Light.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
-/* NAV ICONS */
+.emporium-font {
+  font-family: "EmporiumLogo", sans-serif;
+  font-size: 34px;
+  font-weight: normal;
+}
+
 .nav-icon {
   display: flex;
   align-items: center;

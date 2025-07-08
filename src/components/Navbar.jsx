@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   UserOutlined,
   ShoppingCartOutlined,
@@ -12,20 +12,23 @@ import LoginDropdown from "./LoginDropdown";
 import CartSideBar from "./CartSideBar";
 import "../CSS/Navbar.css";
 
-const Navbar = ({ categories = [], allProducts = [] }) => {
+const Navbar = ({ categories = [] }) => {
   const [showLogin, setShowLogin] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("az");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [matchedBrand, setMatchedBrand] = useState("");
 
   const dropdownRef = useRef(null);
   const { user, logout } = useContext(AuthContext);
   const { cartItems, removeFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setShowLogin(false);
       }
     };
@@ -33,84 +36,54 @@ const Navbar = ({ categories = [], allProducts = [] }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
-
-  const handleSearch = () => {
-    const filtered = allProducts.filter(
-      (product) =>
-        product.brand?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.name?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    console.log("Filtered result:", filtered);
-    // Əgər istəsəniz: setFilteredData(filtered)
-  };
 
   return (
     <>
       <nav className="navbar container">
-        <div className="nav-left">
-          <div className="hamburger">&#9776;</div>
-          <ul className={`nav-links ${menuOpen ? "show" : "hide"}`}></ul>
-
-        </div>
-        <div className="hamburger" onClick={toggleMenu}>
-          &#9776;
-        </div>
-
-        <Link to="/" className="logo">
-          Emporium
-        </Link>
-        <ul className={`nav-links ${menuOpen ? "show" : "hide"}`}>
-          {categories.length === 0 ? (
-            <li>Loading...</li>
-          ) : (
-            categories.map((cat) => (
-              <li key={cat.id}>
-                <Link to={`/${cat.slug}`} onClick={() => setMenuOpen(false)}>
-                  {cat.name}
-                </Link>
-              </li>
-            ))
-          )}
+        <ul className="nav-links">
+          {categories.map((cat) => (
+            <li key={cat.id}>
+              <Link to={`/${cat.slug}`}>{cat.name}</Link>
+            </li>
+          ))}
         </ul>
-        <div className="nav-right">
-          <div className="nav-search-lang">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="lang-selector"
-            >
-              <option value="en">EN</option>
-              <option value="az">AZ</option>
-            </select>
 
-            <div className="search-wrapper">
-              <input
-                type="text"
-                placeholder="Search brand or model..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <button onClick={handleSearch}>
-                <SearchOutlined />
-              </button>
-            </div>
+        <Link to="/" className="logo emporium-font">emporium</Link>
+
+
+        <div className="nav-right">
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="lang-selector"
+          >
+            <option value="az">AZ</option>
+            <option value="en">EN</option>
+          </select>
+
+          <div className="search-wrapper">
+            <input
+              type="text"
+              placeholder={language === "az" ? "Axtar..." : "Search..."}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setIsSearchOpen(true)}
+              onKeyDown={(e) => e.key === "Enter" && setIsSearchOpen(true)}
+            />
+            <button onClick={() => setIsSearchOpen(true)}>
+              <SearchOutlined />
+            </button>
           </div>
 
           <UserOutlined
             onClick={() => setShowLogin((prev) => !prev)}
             style={{ cursor: "pointer", fontSize: 20 }}
           />
-
-          <Link
-            to="/wishlist"
-            style={{ marginLeft: 15, fontSize: 20, color: "inherit" }}
-          >
+          <Link to="/wishlist" style={{ fontSize: 20, color: "inherit" }}>
             <HeartOutlined />
           </Link>
-
           <ShoppingCartOutlined
-            style={{ marginLeft: 10, fontSize: 20 }}
+            style={{ fontSize: 20 }}
             onClick={() => setCartOpen((prev) => !prev)}
           />
 
@@ -120,23 +93,15 @@ const Navbar = ({ categories = [], allProducts = [] }) => {
                 <LoginDropdown onClose={() => setShowLogin(false)} />
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <p style={{ marginBottom: "10px", fontWeight: "bold" }}>
-                    Hello,{" "}
-                    <span style={{ color: "#1890ff" }}>{user.email}</span>
+                  <p>
+                    Hello, <span style={{ color: "#1890ff" }}>{user.email}</span>
                   </p>
                   <button
                     onClick={() => {
                       logout();
                       setShowLogin(false);
                     }}
-                    style={{
-                      background: "#f5222d",
-                      color: "#fff",
-                      border: "none",
-                      padding: "8px 16px",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                    }}
+                    className="logout-button"
                   >
                     Log Out
                   </button>
@@ -146,6 +111,51 @@ const Navbar = ({ categories = [], allProducts = [] }) => {
           )}
         </div>
       </nav>
+
+      {isSearchOpen && (
+        <div className="search-modal">
+          <span className="close-icon" onClick={() => setIsSearchOpen(false)}>
+            ×
+          </span>
+          <h1 className="modal-logo">emporium</h1>
+
+          <div className="modal-search-wrapper">
+            <input
+              type="text"
+              placeholder={language === "az" ? "Axtar..." : "Search..."}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              autoFocus
+            />
+            <button><SearchOutlined /></button>
+          </div>
+
+          {matchedBrand && (
+            <div className="search-results">
+              <h3>{matchedBrand} məhsulları:</h3>
+              <ul className="product-list">
+                {filteredProducts.map((item) => (
+                  <li
+                    key={item.id}
+                    className="product-item"
+                    onClick={() => {
+                      navigate(`/product/${item.id}`);
+                      setIsSearchOpen(false);
+                    }}
+                  >
+                    <img src={item.image} alt={item.name} />
+                    <div>
+                      <p>{item.name}</p>
+                      <small>{item.brand}</small>
+                      <strong>{item.price} AZN</strong>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
 
       {cartOpen && (
         <CartSideBar

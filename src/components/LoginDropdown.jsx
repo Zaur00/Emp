@@ -15,7 +15,7 @@ const LoginDropdown = ({ onClose }) => {
   };
 
   return (
-    <div className="login-dropdown">
+    <>
       <Form
         name="login_form"
         initialValues={{ remember: true }}
@@ -76,7 +76,7 @@ const LoginDropdown = ({ onClose }) => {
           Qeydiyyatdan keç
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 

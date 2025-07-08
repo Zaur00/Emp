@@ -3,10 +3,8 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 20px 0; /* Add 60px padding-top to push the content down */
 }
 
-/* NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
@@ -14,15 +12,12 @@
   right: 0;
   width: 68.5%;
   background-color: white;
-  z-index: 9999;
+  z-index: 1000;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  height: 60px; /* Ensure height of navbar */
-  padding: 0 20px; /* Add padding for left and right */
+  height: 60px;
 }
-
-/* LOGO */
 .logo {
   font-size: 22px;
   font-weight: bold;
@@ -93,7 +88,8 @@
 @media (max-width: 1024px) {
   .container {
     width: 100%;
-    padding: 80px 20px 20px; /* Increase padding-top for mobile */
+    padding: 80px 20px 20px;
+    /* Increase padding-top for mobile */
   }
 
   .hamburger {
