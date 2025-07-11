@@ -4,7 +4,6 @@ import DataProvider from "./Context/DataContext";
 import AuthProvider from "./Context/AuthContext";
 import { CartProvider } from "./Context/CartContext";
 import { WishlistProvider } from "./Context/WishListContext";
-
 import Home from "./pages/Home";
 import Registration from "./pages/Registration";
 import ProductDetail from "./pages/ProductDetail";
@@ -24,7 +23,8 @@ import Loyalty from "./pages/Loyalty";
 import Delivery from "./pages/Delivery";
 import Payment from "./pages/Payment";
 import Returns from "./pages/Returns";
-
+import BrandProductsPage from "./pages/BrandProductsPage";
+import "./CSS/font.css";
 function App() {
   const [categories, setCategories] = useState([]);
 
@@ -37,7 +37,7 @@ function App() {
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    fetch("https://ecommerce.ibradev.me/brands/all") // Sənin brend endpointin
+    fetch("https://ecommerce.ibradev.me/brands/all") 
       .then((res) => res.json())
       .then((data) => setBrands(data));
   }, []);
@@ -62,6 +62,8 @@ function App() {
                 brands={brands}
               />
               <Routes>
+                <Route path="/category/:slug" element={<CategoryPage />} />
+                <Route path="/brand/:slug" element={<BrandProductsPage />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/product/:id" element={<ProductDetail />} />

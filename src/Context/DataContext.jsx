@@ -5,10 +5,11 @@ import axios from "axios";
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const [categories, setCategories] = useState([]); // <--- boş array ilə başlanır
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
-
+  const [brands, setBrands] = useState([]);
   const toggleFavorite = (product) => {
     setFavorites((prev) =>
       prev.find((item) => item.id === product.id)
@@ -18,23 +19,33 @@ const DataProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("https://ecommerce.ibradev.me/categories/all");
-        setCategories(response.data || []);
+        const [categoriesRes, productsRes, brandsRes] = await Promise.all([
+          axios.get("https://ecommerce.ibradev.me/categories/all"),
+          axios.get("https://ecommerce.ibradev.me/products/all?limit=100"),
+          axios.get("https://ecommerce.ibradev.me/brands/all"),
+        ]);
+
+        setCategories(categoriesRes.data || []);
+        setProducts(productsRes.data?.data || []);
+        setBrands(brandsRes.data || []);
       } catch (error) {
-        console.error("Kateqoriyalar yüklənərkən xəta baş verdi:", error);
-        setCategories([]); // xəta olsa belə boş array təyin olunur
+        setCategories([]);
+        setProducts([]);
+        setBrands([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCategories();
+    fetchData();
   }, []);
 
+
   return (
-    <DataContext.Provider value={{ categories, loading }}>
+    <DataContext.Provider value={{ categories, products, brands, loading, favorites, toggleFavorite }}>
+
       {children}
     </DataContext.Provider>
   );

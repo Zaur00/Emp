@@ -1,103 +1,13 @@
 /* CONTAINER */
 .container {
-  width: 1300px;
-  margin: 0 auto;
-}
-
-/* NAVBAR */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   width: 100%;
-  background-color: #eee;
-  z-index: 9999;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 
-.navbar .logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  transform: translateX(-50%);
-  z-index: 10001;
-}
-
-@font-face {
-  font-family: "EmporiumLogo";
-  src: url("../assets/Montserrat-Ace-Light.otf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-.emporium-font {
-  font-family: "EmporiumLogo", sans-serif;
-  font-size: 34px;
-  font-weight: normal;
-}
-
-.nav-icon {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  z-index: 10001;
-}
-
-.nav-icon span {
-  font-size: 20px;
-  width: 21px;
-  height: 21px;
-  cursor: pointer;
-}
-
-/* HAMBURGER MENU */
-.hamburger {
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
-  /* position: absolute;
-  left: 20px;
-  top: 15px; */
-  z-index: 10001;
-}
-
-/* NAV LINKS */
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-  padding: 0;
-  margin: 0;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #000;
-  font-size: 18px;
-  font-weight: 500;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-/* LOGIN DROPDOWN */
-.login-dropdown {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  z-index: 1000;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 270px;
-  padding: 10px;
-}
+/* NAVBAR ELEMENTS SKIPPED */
 
 /* CATEGORY SECTION */
 .bottom-categories {
@@ -109,7 +19,6 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-
 .bottom-categories a {
   text-decoration: none;
   color: #000;
@@ -150,132 +59,73 @@
   text-shadow: 1px 1px 5px #000;
 }
 
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .container {
-    width: 100%;
-  }
-
-  .navbar {
-    align-items: center;
-    padding: 10px 20px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 40px 20px;
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    z-index: 1000;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .nav-links.hide {
-    display: none;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .nav-links li {
-    padding: 15px 0;
-    font-size: 20px;
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .bottom-categories {
-    padding-top: 150px;
-  }
-
-  .bottom-categories a {
-    height: auto;
-  }
-
+.home-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
+.home-text::before,
+.home-text::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #000;
+  margin: 0 20px;
+}
+
+.home-text h1 {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bottom-categories a {
+    height: 400px;
+  }
+
+  .category-name {
+    font-size: 24px;
+  }
+}
 
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    position: relative;
-    /* hamburger üçün lazım */
+  .category-grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 
-  .logo {
+  .bottom-categories a {
+    height: 350px;
+  }
+
+  .category-name {
+    font-size: 22px;
+    padding: 0.5rem;
+  }
+
+  .home-text h1 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-categories a {
+    height: 250px;
+  }
+
+  .category-name {
+    font-size: 18px;
+    padding: 0.3rem;
+  }
+
+  .home-text h1 {
     font-size: 20px;
   }
-
-  /* Hamburger menyu ikonu görünür */
-  .hamburger {
-    display: block;
-    font-size: 28px;
-    cursor: pointer;
-    user-select: none;
-    margin: 20px 50px;
-  }
-
-  /* Nav links açılıb-bağlanır */
-  .nav-links.hide {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    background: #eee;
-    margin-top: 50px;
-    padding: 10px 0;
-    border-top: 1px solid #ccc;
-  }
-
-  .nav-links.show {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    background: #eee;
-    margin-top: 50px;
-    padding: 10px 0;
-    border-top: 1px solid #ccc;
-  }
-
-  .nav-links li {
-    padding: 10px 0;
-    font-size: 18px;
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    margin-top: 35px;
-  }
-
-  /* Mobil görünüşdə nav iconları gizlə */
-  .nav-icon {
-    display: none;
-  }
-
-  /* Kateqoriya grid - 1 sütuna keçir */
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Kateqoriya kartlarının hündürlüyü azaldıla bilər */
-  .bottom-categories a {
-    height: 300px;
-  }
-
-  /* Digər mobil üçün əlavə stil lazımdırsa buraya əlavə et */
 }

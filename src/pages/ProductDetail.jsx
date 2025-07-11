@@ -10,6 +10,7 @@ import ColorSelector from "../components/ColorSelector";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import SizeGuideModal from "../components/SizeGuideModal";
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -48,119 +49,162 @@ const ProductDetail = () => {
       <Navbar categories={categories} />
 
       <div className="product-detail-container">
-        <div className="product-gallery">
-          {!loading && (
-            <div className="thumbnail-list">
-              {product.images.map((img, idx) => (
+        {product && (
+          <div className="breadcrumb">
+            <Link to="/">Emporium</Link> &nbsp;/&nbsp;
+
+            {product.category?.parent?.parent && (
+              <>
+                <Link to={`/category/${product.category.parent.parent.slug}`}>
+                  {product.category.parent.parent.name}
+                </Link> &nbsp;/&nbsp;
+              </>
+            )}
+
+            {product.category?.parent && (
+              <>
+                <Link to={`/category/${product.category.parent.slug}`}>
+                  {product.category.parent.name}
+                </Link> &nbsp;/&nbsp;
+              </>
+            )}
+
+            {product.category && (
+              <>
+                <Link to={`/category/${product.category.slug}`}>
+                  {product.category.name}
+                </Link> &nbsp;/&nbsp;
+              </>
+            )}
+
+            {product.Brands && (
+              <>
+                <Link to={`/brand/${product.Brands.slug}`}>
+                  {product.Brands.name}
+                </Link> &nbsp;/&nbsp;
+              </>
+            )}
+
+            <span>{product.name}</span>
+          </div>
+
+        )}
+
+        <div style={{ display: "flex", gap: "20px", justifyContent: "left", textAlign: "center" }}>
+          <div className="product-gallery">
+            {!loading && (
+              <div className="thumbnail-list">
+                {product.images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    onClick={() => setCurrentIndex(idx)}
+                    onMouseEnter={() => setCurrentIndex(idx)}
+                    className={idx === currentIndex ? "active" : ""}
+                    alt={`Thumb ${idx}`}
+                  />
+                ))}
+              </div>
+            )}
+            <div className="slider-wrapper">
+              {loading ? (
+                <Skeleton variant="rectangular" width={400} height={400} />
+              ) : (
                 <img
-                  key={idx}
-                  src={img}
-                  onClick={() => setCurrentIndex(idx)}
-                  onMouseEnter={() => setCurrentIndex(idx)}
-                  className={idx === currentIndex ? "active" : ""}
-                  alt={`Thumb ${idx}`}
+                  src={product.images[currentIndex]}
+                  alt={`Image ${currentIndex + 1}`}
+                  className="main-slider-image"
                 />
-              ))}
+              )}
             </div>
-          )}
-          <div className="slider-wrapper">
+          </div>
+
+          <div className="product-info">
             {loading ? (
-              <Skeleton variant="rectangular" width={400} height={400} />
+              <>
+                <Skeleton variant="text" width={300} height={50} />
+                <Skeleton variant="text" width={200} />
+                <Skeleton variant="text" width={250} />
+              </>
             ) : (
-              <img
-                src={product.images[currentIndex]}
-                alt={`Image ${currentIndex + 1}`}
-                className="main-slider-image"
-              />
+              <>
+                <h1>{product.name}</h1>
+                <p className="description">{product.description}</p>
+                <p className="price">Price: ${product.price}</p>
+                <p className="discount">Discount: {product.discount}%</p>
+                <p>
+                  <strong>Colors:</strong> {product.Colors?.join(", ")}
+                </p>
+
+                <ColorSelector
+                  colors={product.Colors}
+                  selectedColor={selectedColor}
+                  onSelect={setSelectedColor}
+                />
+                <p>
+                  <strong>Sizes:</strong> {product.Size?.join(", ")}{" "}
+                  <button
+                    onClick={() => setShowSizeModal(true)}
+                    className="size-guide-link"
+                  >
+                    View size guide
+                  </button>
+                </p>
+                <SizeGuideModal
+                  product={product}
+                  show={showSizeModal}
+                  onClose={() => setShowSizeModal(false)}
+                />
+
+                <div className="extra-info">
+                  <p>
+                    <strong>Brand:</strong> {product.Brands?.name}
+                  </p>
+                  <p>
+                    <strong>Category:</strong> {product.category?.name}
+                  </p>
+                  <p>
+                    <strong>Stock:</strong>{" "}
+                    {product.stock > 0 ? "Mövcuddur" : "Mövcud deyil"}
+                  </p>
+                </div>
+
+                {/* ⭐️ ƏMƏLİYYAT DÜYMƏLƏRİ */}
+                <div className="product-actions">
+                  {isInCart(product.id, product.Size?.[0]) ? (
+                    <button
+                      className="go-to-cart"
+                      onClick={() => navigate("/cart")}
+                    >
+                      GO TO CART
+                    </button>
+                  ) : (
+                    <button
+                      className="add-to-cart"
+                      onClick={() =>
+                        addToCart({
+                          id: product.id,
+                          name: product.name,
+                          image: product.images?.[0],
+                          price: product.price,
+                          size: product.Size?.[0],
+                          quantity: 1,
+                        })
+                      }
+                    >
+                      ADD TO CART
+                    </button>
+                  )}
+                  <button
+                    className="add-to-wishlist"
+                    onClick={() => toggleWishlist(product)}
+                  >
+                    {isInWishlist ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}
+                  </button>
+                </div>
+              </>
             )}
           </div>
-        </div>
-
-        <div className="product-info">
-          {loading ? (
-            <>
-              <Skeleton variant="text" width={300} height={50} />
-              <Skeleton variant="text" width={200} />
-              <Skeleton variant="text" width={250} />
-            </>
-          ) : (
-            <>
-              <h1>{product.name}</h1>
-              <p className="description">{product.description}</p>
-              <p className="price">Price: ${product.price}</p>
-              <p className="discount">Discount: {product.discount}%</p>
-              <p>
-                <strong>Colors:</strong> {product.Colors?.join(", ")}
-              </p>
-
-              <ColorSelector
-                colors={product.Colors}
-                selectedColor={selectedColor}
-                onSelect={setSelectedColor}
-              />
-              <p>
-                <strong>Sizes:</strong> {product.Size?.join(", ")}{" "}
-                <button
-                  onClick={() => setShowSizeModal(true)}
-                  className="size-guide-link"
-                >
-                  View size guide
-                </button>
-              </p>
-              <SizeGuideModal
-                product={product}
-                show={showSizeModal}
-                onClose={() => setShowSizeModal(false)}
-              />
-
-              <div className="extra-info">
-                <p>
-                  <strong>Brand:</strong> {product.Brands?.name}
-                </p>
-                <p>
-                  <strong>Category:</strong> {product.category?.name}
-                </p>
-                <p>
-                  <strong>Stock:</strong>{" "}
-                  {product.stock > 0 ? "Mövcuddur" : "Mövcud deyil"}
-                </p>
-              </div>
-
-              {/* ⭐️ ƏMƏLİYYAT DÜYMƏLƏRİ */}
-              <div className="product-actions">
-                {isInCart(product.id, product.Size?.[0]) ? (
-                  <button
-                    className="go-to-cart"
-                    onClick={() => navigate("/cart")}
-                  >
-                    GO TO CART
-                  </button>
-                ) : (
-                  <button
-                    className="add-to-cart"
-                    onClick={() =>
-                      addToCart({
-                        id: product.id,
-                        name: product.name,
-                        image: product.images?.[0],
-                        price: product.price,
-                        size: product.Size?.[0],
-                        quantity: 1,
-                      })
-                    }
-                  >
-                    ADD TO CART
-                  </button>
-                )}
-                <button
-                  className="add-to-wishlist"
-                  onClick={() => toggleWishlist(product)}
-                >
-                  {isInWishlist ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}
-                </button>
-              </div>
-            </>
-          )}
         </div>
       </div>
     </div>

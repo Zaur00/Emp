@@ -11,11 +11,26 @@ import "../CSS/CategoryPage.css";
 const CategoryPage = () => {
   const { wishlist, toggleWishlist } = useContext(WishlistContext);
   const { slug } = useParams();
-  const { categories, loading: categoriesLoading } = useContext(DataContext);
 
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState(null);
+  const { categories, products: allProducts, loading: categoriesLoading } = useContext(DataContext);
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const res = await axios.get("https://ecommerce.ibradev.me/brands/all");
+        setBrands(res.data || []);
+      } catch (err) {
+        console.error("Brendlər yüklənərkən xəta:", err);
+        setBrands([]);
+      }
+    };
+
+    fetchBrands();
+  }, []);
 
   useEffect(() => {
     if (categoriesLoading) return;
@@ -49,52 +64,98 @@ const CategoryPage = () => {
     fetchProducts();
   }, [slug, categories, categoriesLoading]);
 
+  const isParentCategory = category && category.children?.length > 0;
+
   return (
     <div>
       <Navbar categories={categories} />
 
       <div className="container main-content">
-        <section className="content">
-          <div className="product-grid">
-            {loading ? (
-              Array.from({ length: 6 }).map((_, idx) => (
-                <div key={idx} className="product-card">
-                  <Skeleton variant="rectangular" width={255} height={380} />
-                  <Skeleton width="80%" height={25} />
-                  <Skeleton width="60%" height={20} />
-                  <Skeleton width="50%" height={20} />
-                </div>
-              ))
-            ) : products.length === 0 ? (
-              <p>No products found in this category..</p>
-            ) : (
-              products.map((product) => (
+        <h2 className="category-title">{category?.name}</h2>
+
+        {/* Əgər parent kateqoriyadırsa, alt kateqoriyalar və brendləri göstər */}
+        {isParentCategory && (
+          <>
+            <div className="subcategory-grid">
+              {category.children.map((child) => (
+                <Link to={`/category/${child.slug}`} key={child.id} className="subcategory-card">
+                  <div>
+                    <img src={child.image || "https://via.placeholder.com/150"} alt={child.name} />
+                    <p>{child.name}</p>
+                    <button>SHOP NOW</button>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="brand-grid">
+              {brands.map((brand) => (
+                <Link to={`/brand/${brand.slug}`} key={brand.id} className="brand-card">
+                  <div>
+                    <img src={brand.image || "https://via.placeholder.com/100"} alt={brand.name} />
+                    <p>{brand.name}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
+
+
+        {category?.isParent ? (
+          <>
+            {/* 🔹 3-4 məhsul göstər */}
+            <div className="product-grid">
+              {products.slice(0, 4).map((product) => (
                 <Link to={`/product/${product.id}`} key={product.id}>
                   <div className="product-card">
-                    <div
-                      className="favorite-icon"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleWishlist(product);
-                      }}
-                    >
-                      {wishlist.find((item) => item.id === product.id) ? (
-                        <HeartFilled style={{ fontSize: 20, color: "red" }} />
-                      ) : (
-                        <HeartOutlined style={{ fontSize: 20, color: "gray" }} />
-                      )}
-                    </div>
-
                     <img src={product.images?.[0]} alt={product.name} />
                     <h3>{product.name}</h3>
                     <p>${product.price}</p>
-                    <p>{product.discount}% Endirim</p>
                   </div>
                 </Link>
-              ))
-            )}
+              ))}
+            </div>
+
+            {/* 🔸 Brendləri göstər */}
+            <div className="brand-section">
+              <h2>Popular Brands</h2>
+              <div className="brand-list">
+                {brands
+                  .filter((brand) =>
+                    allProducts.some(
+                      (product) =>
+                        product.Brand?.id === brand.id &&
+                        product.category?.parentId === category.id
+                    )
+                  )
+                  .map((brand) => (
+                    <div key={brand.id} className="brand-card">
+                      <img src={brand.logo || "/placeholder.png"} alt={brand.name} />
+                      <h4>{brand.name}</h4>
+                      <Link to={`/brand/${brand.slug}`} className="shop-now-link">
+                        Shop Now
+                      </Link>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          // alt kateqoriya üçün normal məhsullar listlənir
+          <div className="product-grid">
+            {products.map((product) => (
+              <Link to={`/product/${product.id}`} key={product.id}>
+                <div className="product-card">
+                  <img src={product.images?.[0]} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>${product.price}</p>
+                </div>
+              </Link>
+            ))}
           </div>
-        </section>
+        )}
+
       </div>
     </div>
   );
