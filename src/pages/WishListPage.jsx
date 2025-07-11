@@ -18,9 +18,8 @@ const WishlistPage = () => {
 
   return (
     <div className="container">
-      <Navbar categories={categories} />
 
-      <h2>Wishlist</h2>
+      <h2  style={{ paddingLeft: "20px" }}>Wishlist</h2>
       {wishlist.length === 0 ? (
         <p>Heç bir məhsul seçilməyib.</p>
       ) : (

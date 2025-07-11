@@ -46,7 +46,7 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Navbar categories={categories} />
+      
 
       <div className="product-detail-container">
         {product && (

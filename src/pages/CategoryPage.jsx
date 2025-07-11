@@ -68,8 +68,7 @@ const CategoryPage = () => {
 
   return (
     <div>
-      <Navbar categories={categories} />
-
+      
       <div className="container main-content">
         <h2 className="category-title">{category?.name}</h2>
 

@@ -134,7 +134,6 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar container">
-        {/* Hamburger button */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </button>

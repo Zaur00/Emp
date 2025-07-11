@@ -24,7 +24,6 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar categories={categories} />
       <section className="container bottom-categories">
         <div className="home-text">
           <h1>Choose a department</h1>
