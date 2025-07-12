@@ -55,7 +55,6 @@
   margin-bottom: 20px;
 }
 
-/* Əlaqə cədvəli */
 .contact-table-wrapper {
   display: flex;
   justify-content: space-between;
@@ -107,7 +106,6 @@
   height: 48px;
 }
 
-/* Form stili */
 .contact-form {
   display: flex;
   flex-direction: column;

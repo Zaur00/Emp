@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-// Context yaradılır
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../CSS/Footer.css"; // Stil faylı ayrıca izah ediləcək
+import "../CSS/Footer.css";
 import { SiContactlesspayment } from "react-icons/si";
 import { TbTruckDelivery } from "react-icons/tb";
 import { TbTruckReturn } from "react-icons/tb";
@@ -9,7 +9,7 @@ import { LiaCcMastercard } from "react-icons/lia";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
-import { Link } from "react-router-dom"; // React Router istifadə edərək linklər yaratmaq üçün
+import { Link } from "react-router-dom"; 
 const Footer = () => {
     return (
         <div className="container">

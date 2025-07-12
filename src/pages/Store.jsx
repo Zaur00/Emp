@@ -1,5 +1,3 @@
-// src/pages/Store.jsx
-import React from 'react';
 import '../CSS/Store.css';
 import StoreSlider from '../components/StoreSlider';
 const Store = () => {

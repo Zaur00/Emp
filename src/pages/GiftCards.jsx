@@ -1,5 +1,5 @@
 import React from "react";
-import "../CSS/FAQ.css"; // Eyni CSS-i istifadə edirik
+import "../CSS/FAQ.css";
 import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa6";
 

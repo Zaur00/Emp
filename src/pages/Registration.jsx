@@ -1,4 +1,3 @@
-// 📁 src/pages/Registration.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,9 +8,8 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Burada qeydiyyat üçün API çağırışı əlavə oluna bilər
     alert(`Qeydiyyat: ${email}`);
-    navigate("/"); // Qeydiyyatdan sonra home-a yönləndir
+    navigate("/"); 
   };
 
   return (

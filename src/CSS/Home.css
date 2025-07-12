@@ -1,4 +1,3 @@
-/* CONTAINER */
 .container {
   width: 100%;
   max-width: 1300px;
@@ -7,9 +6,6 @@
 }
 
 
-/* NAVBAR ELEMENTS SKIPPED */
-
-/* CATEGORY SECTION */
 .bottom-categories {
   padding-top: 100px;
 }

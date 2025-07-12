@@ -1,5 +1,4 @@
-import React from "react";
-import "../CSS/FAQ.css"; // Eyni CSS istifadə olunur
+import "../CSS/FAQ.css"; 
 import { Link } from "react-router-dom";
 
 const Delivery = () => {

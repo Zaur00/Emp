@@ -138,7 +138,6 @@ const Navbar = () => {
           ☰
         </button>
 
-        {/* Nav Links */}
         <ul className={`nav-links ${menuOpen ? "open" : "hide"}`}>
           {categoriesData.map((cat) => (
             <li key={cat.id}>
@@ -148,13 +147,10 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-
-        {/* Logo */}
         <Link to="/" className="logo emporium-font">
           emporium
         </Link>
 
-        {/* Right Icons */}
         <div className="nav-right">
           {showLogin && (
             <div ref={dropdownRef} className="login-dropdown">
@@ -202,7 +198,6 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Search */}
         <div className="search-wrapper">
           <input
             type="text"
@@ -217,8 +212,6 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-
-      {/* Search Modal */}
       {isSearchOpen && (
         <div className="search-modal">
           <span className="close-icon" onClick={() => setIsSearchOpen(false)}>
@@ -280,7 +273,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Cart Sidebar */}
       {cartOpen && (
         <CartSideBar
           cartItems={cartItems}

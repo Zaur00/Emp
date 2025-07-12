@@ -13,9 +13,7 @@ const Returns = () => {
             </div>
 
             <div className="faq-container">
-                {/* Hero şəkil */}
                 <h2>Geri qaytarılma və dəyişdirmə</h2>
-                {/* Naviqasiya menyusu */}
                 <aside className="faq-sidebar">
                     <ul className="sidebar-ul-common">
                         <li><Link to="/contact">Əlaqə</Link></li>
@@ -29,7 +27,6 @@ const Returns = () => {
                 </aside>
 
                 <div className="faq-body">
-                    {/* Sol kontent */}
                     <main className="faq-main">
 
                         <p>
@@ -55,7 +52,6 @@ const Returns = () => {
                         </ul>
                     </main>
 
-                    {/* Sağ – yardım hissəsi */}
                     <aside className="faq-help">
                         <p><strong>Kömək lazımdır?</strong></p>
                         <p>+994 51 225 96 96 nömrəsinə zəng edin</p>

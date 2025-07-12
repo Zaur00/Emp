@@ -2,7 +2,6 @@
     max-width: 1200px;
     margin: 4rem auto;
     padding: 100px 1rem 0;
-    /* 👈 navbarın hündürlüyünə görə tənzimlə */
 }
 
 
@@ -22,11 +21,8 @@
 .brand-filter-sidebar {
     position: sticky;
     top: 100px;
-    /* 👈 navbar hündürlüyü qədər boşluq */
     height: fit-content;
-    /* Yalnız ehtiyac olduqca hündürlük alsın */
     align-self: flex-start;
-    /* sticky-nin grid/flex strukturunda düz işləməsi üçün */
 }
 
 
@@ -123,7 +119,6 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Əgər şəkil tam görünsün deyirsənsə */
     border-radius: 8px;
     display: block;
     margin: 0;

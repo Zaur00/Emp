@@ -250,7 +250,6 @@ const BrandProductsPage = () => {
           <p className="product-count">{filteredProducts.length} məhsul</p>
         </aside>
 
-        {/* Məhsul Grid */}
         <section className="brand-product-grid">
           {loading ? (
             <p className="loading-text">Yüklənir...</p>

@@ -23,7 +23,6 @@ const StoreSlider = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  // TOUCH EVENTS
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
   };
@@ -36,7 +35,6 @@ const StoreSlider = () => {
     handleSwipe();
   };
 
-  // MOUSE EVENTS
   const handleMouseDown = (e) => {
     isDragging.current = true;
     startX.current = e.clientX;
@@ -64,7 +62,6 @@ const StoreSlider = () => {
       prevSlide();
     }
 
-    // reset
     startX.current = null;
     endX.current = null;
   };
@@ -81,7 +78,7 @@ const StoreSlider = () => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp} // mouse çıxanda da swipe tamamlanır
+        onMouseLeave={handleMouseUp} 
         style={{ cursor: "grab" }}
       >
         <img

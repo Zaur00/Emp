@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import { Link } from "react-router-dom";
-import "../CSS/CartSideBar.css"; // Stil faylı ayrıca izah ediləcək
-
+import "../CSS/CartSideBar.css"; 
 const CartSideBar = ({ isOpen, onClose }) => {
   const { cartItems, removeFromCart } = useContext(CartContext);
 

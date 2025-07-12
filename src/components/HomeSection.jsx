@@ -1,5 +1,5 @@
 import React from "react";
-import "../CSS/HomeSection.css"; // Stil faylı ayrıca izah ediləcək
+import "../CSS/HomeSection.css"; 
 function HomeSection() {
     const images = [
         "https://cdn-cloudflare.emporium.az/home-page/cat_228.jpg?v=1.8.40",

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
-import Navbar from "../components/Navbar";
 import "../CSS/Home.css";
 
 const Home = () => {

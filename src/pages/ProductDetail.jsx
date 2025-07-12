@@ -7,7 +7,6 @@ import { DataContext } from "../Context/DataContext";
 import { WishlistContext } from "../Context/WishListContext";
 import { CartContext } from "../Context/CartContext";
 import ColorSelector from "../components/ColorSelector";
-import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import SizeGuideModal from "../components/SizeGuideModal";
 import { Link } from "react-router-dom";
@@ -169,7 +168,6 @@ const ProductDetail = () => {
                   </p>
                 </div>
 
-                {/* ⭐️ ƏMƏLİYYAT DÜYMƏLƏRİ */}
                 <div className="product-actions">
                   {isInCart(product.id, product.Size?.[0]) ? (
                     <button

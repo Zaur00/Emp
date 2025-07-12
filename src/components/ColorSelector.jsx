@@ -1,5 +1,5 @@
 import React from "react";
-import "../CSS/ColorSelector.css"; // Ensure you have this CSS file for styling 
+import "../CSS/ColorSelector.css";
 const ColorSelector = ({ colors, selectedColor, onSelect }) => {
     return (
         <div className="color-selector">

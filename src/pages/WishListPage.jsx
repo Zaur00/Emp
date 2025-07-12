@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { WishlistContext } from "../Context/WishListContext";
 import { Link } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
-import Navbar from "../components/Navbar";
 import "../CSS/WishListPage.css"; 
 
 const WishlistPage = () => {

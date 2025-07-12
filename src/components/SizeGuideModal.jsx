@@ -4,8 +4,7 @@ import "../CSS/SizeGuideModal.css";
 const SizeGuideModal = ({ product, show, onClose }) => {
   if (!show || !product) return null;
 
-  const isMan = product.gender === "men"; // 🔁 gender: 'man' və ya 'woman' backend-dən gəlməlidir
-
+  const isMan = product.gender === "men";
   return (
     <div className="size-guide-backdrop" onClick={onClose}>
       <div className="size-guide-modal" onClick={(e) => e.stopPropagation()}>

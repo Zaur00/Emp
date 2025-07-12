@@ -13,7 +13,6 @@ const Contact = () => {
             </div>
             <div className="contact-container">
                 <div className="contact-content">
-                    {/* Sol menyu */}
                     <aside className="contact-sidebar">
                         <ul>
                             <li className="active">Əlaqə</li>
@@ -26,7 +25,6 @@ const Contact = () => {
                         </ul>
                     </aside>
 
-                    {/* Sağ hissə */}
                     <main className="contact-main">
                         <h2>Bizimlə əlaqə saxlayın</h2>
 
@@ -61,7 +59,6 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* Əlaqə forması */}
                         <form className="contact-form">
                             <label>Müraciətin növü</label>
                             <select>
@@ -86,7 +83,6 @@ const Contact = () => {
                                 <input type="checkbox" />
                                 <label>Ben robot deyiləm</label>
                             </div>
-
                             <button type="submit">Göndər</button>
                         </form>
                     </main>

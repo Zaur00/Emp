@@ -1,4 +1,4 @@
-import "../CSS/NewsletterSection.css"; // Stil faylı ayrıca izah ediləcək
+import "../CSS/NewsletterSection.css"; 
 const NewsletterSection = () => {
     return (
         <div className="container">

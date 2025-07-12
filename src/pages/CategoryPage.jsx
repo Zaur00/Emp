@@ -1,17 +1,12 @@
-import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { useEffect, useState, useContext } from "react";
 import { WishlistContext } from "../Context/WishListContext";
 import { DataContext } from "../Context/DataContext";
 import { useParams, Link } from "react-router-dom";
-import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
-import Navbar from "../components/Navbar";
 import "../CSS/CategoryPage.css";
 
 const CategoryPage = () => {
-  const { wishlist, toggleWishlist } = useContext(WishlistContext);
   const { slug } = useParams();
-
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState(null);
@@ -68,11 +63,10 @@ const CategoryPage = () => {
 
   return (
     <div>
-      
-      <div className="container main-content">
-        <h2 className="category-title">{category?.name}</h2>
 
-        {/* Əgər parent kateqoriyadırsa, alt kateqoriyalar və brendləri göstər */}
+      <div className="container main-content">
+        <h2 style={{ fontSize: "24px", fontWeight: "bold", fontFamily: "MontserratAce', sans-serif" }} className="category-title">{category?.name}</h2>
+
         {isParentCategory && (
           <>
             <div className="subcategory-grid">
@@ -103,7 +97,6 @@ const CategoryPage = () => {
 
         {category?.isParent ? (
           <>
-            {/* 🔹 3-4 məhsul göstər */}
             <div className="product-grid">
               {products.slice(0, 4).map((product) => (
                 <Link to={`/product/${product.id}`} key={product.id}>
@@ -116,7 +109,6 @@ const CategoryPage = () => {
               ))}
             </div>
 
-            {/* 🔸 Brendləri göstər */}
             <div className="brand-section">
               <h2>Popular Brands</h2>
               <div className="brand-list">
@@ -141,7 +133,6 @@ const CategoryPage = () => {
             </div>
           </>
         ) : (
-          // alt kateqoriya üçün normal məhsullar listlənir
           <div className="product-grid">
             {products.map((product) => (
               <Link to={`/product/${product.id}`} key={product.id}>
